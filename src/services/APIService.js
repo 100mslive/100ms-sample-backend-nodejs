@@ -1,20 +1,22 @@
 const axios = require('axios').default;
 
-class ApiService {
+class APIService {
     #axiosInstance;
-    constructor({tokenGenerator}) {
+    #tokenServiceInstance
+    constructor(tokenService) {
         this.#axiosInstance = axios.create(
             {
                 baseURL: "https://api.100ms.live/v2",
-                timeout: 3 * 60000,
+                timeout: 3 * 60000
             });
+        this.#tokenServiceInstance = tokenService;
        this.#configureAxios();
     }
 
     #configureAxios(){
         this.#axiosInstance.interceptors.request.use((config) => {
             config.headers = {
-                Authorization: `Bearer ${tokenGenerator.getManagementToken()}`,
+                Authorization: `Bearer ${this.#tokenServiceInstance.getManagementToken()}`,
                 Accept: "application/json",
                 "Content-Type": "application/json",
             };
@@ -34,7 +36,7 @@ class ApiService {
                     console.log("Retrying request with refreshed token");
                     originalRequest._retry = true;
 
-                    this.axios.defaults.headers.common["Authorization"] = "Bearer " + tokenGenerator.getManagementToken(true);
+                    this.axios.defaults.headers.common["Authorization"] = "Bearer " + this.#tokenServiceInstance.getManagementToken(true);
                     try {
                         return this.axios(originalRequest);
                     } catch (error) {
@@ -46,17 +48,17 @@ class ApiService {
         );
     }
 
-    async get({path,queryParams}){
+    async get(path,queryParams){
         const res = await this.#axiosInstance.get(path,{params: queryParams});
         console.log(`get call to path - ${path}, status code - ${res.status}`);
         return res.data;
     }
 
-    async post({path,payload}){
+    async post(path,payload){
         const res = await this.#axiosInstance.post(path,payload||{});
         console.log(`post call to path - ${path}, status code - ${res.status}`);
         return res.data;
     }
 }
 
-module.exports = {ApiService};
+module.exports = {APIService};

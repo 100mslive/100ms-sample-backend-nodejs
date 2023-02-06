@@ -6,10 +6,10 @@ class TokenService {
     static #app_secret = process.env.APP_SECRET;
     #managementToken;
     constructor() {
-        this.#managementToken = this.getManagementToken();
+        this.#managementToken = this.getManagementToken(true);
     }
 
-    #signPayloadToToken({ payload }) {
+    #signPayloadToToken(payload) {
         let token = jwt.sign(
             payload,
             TokenService.#app_secret,
@@ -22,9 +22,9 @@ class TokenService {
         return token;
     }
 
-    #isTokenExpired({ token }) {
+    #isTokenExpired(token) {
         try {
-            const { exp } = decode(token);
+            const { exp } = jwt.decode(token);
             const buffer = 30; // generate new if it's going to expire soon
             const currTimeSeconds = Math.floor(Date.now() / 1000);
             return !exp || exp + buffer < currTimeSeconds;
@@ -34,7 +34,7 @@ class TokenService {
         }
     }
 
-    getManagementToken({ forceNew }) {
+    getManagementToken(forceNew) {
         if (forceNew || this.#isTokenExpired(this.#managementToken)) {
             let payload = {
                 access_key: TokenService.#app_access_key,

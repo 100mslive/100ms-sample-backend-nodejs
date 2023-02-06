@@ -2,9 +2,10 @@
   "name": "100ms-sample-backend-nodejs",
   "version": "1.0.0",
   "description": "A sample backend server for 100ms live applications",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js",
+    "start:dev": "nodemon -L -P 2000 src/app.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,10 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
+    "moment": "^2.29.4",
     "uuid4": "^2.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
