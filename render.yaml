@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: 100ms-sample-backend-nodejs
+    env: docker
+    disk:
+      name: app
+      mountPath: /app

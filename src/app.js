@@ -49,7 +49,7 @@ app.post('/create-room', async (req, res) => {
 
 });
 
-app.get('/session-attendance', async (req, res) => {
+app.get('/session-analytics', async (req, res) => {
     try {
         const parsedData = await apiService.get(`/sessions/${req.query['session_id']}`);
         console.log(parsedData);
