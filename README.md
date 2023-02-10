@@ -18,11 +18,15 @@ Deploy directly to Render using this button. But don't forget to add the environ
 ## Installation
 1. Clone the repo
 
-`https://github.com/coder-with-a-bushido/100ms-sample-backend-nodejs`
+```
+git clone https://github.com/coder-with-a-bushido/100ms-sample-backend-nodejs.git
+```
 
 2. Install the dependencies
 
-`npm i`
+```
+npm i
+```
 
 3. Rename the `.env.example` to `.env` and add your credentials
 
@@ -35,15 +39,21 @@ APP_SECRET=<YOUR_APP_SECRET>
 
 Running in dev mode (hot reload on file changes):
 
-`npm run start:dev`
+```
+npm run start:dev
+```
 
 Running in production:
 
-`npm run start`
+```
+npm run start
+```
 
 Or
 
-`docker compose up --build`
+```
+docker compose up --build
+```
 
 ## Usage
 
