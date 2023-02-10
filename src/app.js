@@ -13,6 +13,7 @@ const moment = require('moment');
 const tokenService = new TokenService();
 const apiService = new APIService(tokenService);
 
+// Generate an auth token for a peer to join a room
 app.post('/app-token', (req, res) => {
     try {
         const token = tokenService.getAppToken({ room_id: req.body['room_id'], user_id: req.body['user_id'], role: req.body['role'] });
@@ -29,8 +30,10 @@ app.post('/app-token', (req, res) => {
     }
 });
 
+// Create a new room, either randomly or with the requested configuration
 app.post('/create-room', async (req, res) => {
     let payload;
+    // If `random-room` is not true, look for room configuration
     if (!req.body['random-room']) {
         payload = {
             "name": req.body['name'],
@@ -49,6 +52,7 @@ app.post('/create-room', async (req, res) => {
 
 });
 
+// Get Session Analytics for a specific session (like attendance)
 app.get('/session-analytics', async (req, res) => {
     try {
         const parsedData = await apiService.get(`/sessions/${req.query['session_id']}`);

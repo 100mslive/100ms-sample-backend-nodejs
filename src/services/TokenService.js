@@ -1,6 +1,7 @@
 let jwt = require('jsonwebtoken');
 let uuid4 = require('uuid4');
 
+// A utility class for Token generation and management
 class TokenService {
     static #app_access_key = process.env.APP_ACCESS_KEY;
     static #app_secret = process.env.APP_SECRET;
@@ -9,6 +10,7 @@ class TokenService {
         this.#managementToken = this.getManagementToken(true);
     }
 
+    // A private method that uses JWT to sign the payload with APP_SECRET
     #signPayloadToToken(payload) {
         let token = jwt.sign(
             payload,
@@ -22,6 +24,7 @@ class TokenService {
         return token;
     }
 
+    // A private method to check if a JWT token has expired or going to expire soon
     #isTokenExpired(token) {
         try {
             const { exp } = jwt.decode(token);
@@ -34,6 +37,7 @@ class TokenService {
         }
     }
 
+    // Generate new Management token, if expired or forced
     getManagementToken(forceNew) {
         if (forceNew || this.#isTokenExpired(this.#managementToken)) {
             let payload = {
@@ -48,6 +52,7 @@ class TokenService {
         return this.#managementToken;
     }
 
+    // Generate new App/Auth token for a peer
     getAppToken({ room_id, user_id, role }) {
         let payload = {
             access_key: TokenService.#app_access_key,
@@ -63,4 +68,4 @@ class TokenService {
     }
 }
 
-module.exports = {TokenService};
+module.exports = { TokenService };
