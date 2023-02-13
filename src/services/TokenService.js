@@ -1,7 +1,7 @@
 let jwt = require('jsonwebtoken');
 let uuid4 = require('uuid4');
 
-// A utility class for Token generation and management
+// A service class for Token generation and management
 class TokenService {
     static #app_access_key = process.env.APP_ACCESS_KEY;
     static #app_secret = process.env.APP_SECRET;

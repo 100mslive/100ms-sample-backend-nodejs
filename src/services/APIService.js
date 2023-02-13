@@ -1,6 +1,6 @@
 const axios = require('axios').default;
 
-// A utility class for all REST API operations
+// A service class for all REST API operations
 class APIService {
     #axiosInstance;
     #tokenServiceInstance
