@@ -6,3 +6,8 @@ services:
       name: app
       mountPath: /app
     plan: free
+    envVars:
+    - key: APP_ACCESS_KEY
+      sync: false
+    - key: APP_SECRET
+      sync: false
