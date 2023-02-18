@@ -14,9 +14,9 @@ const tokenService = new TokenService();
 const apiService = new APIService(tokenService);
 
 // Generate an auth token for a peer to join a room
-app.post('/app-token', (req, res) => {
+app.post('/auth-token', (req, res) => {
     try {
-        const token = tokenService.getAppToken({ room_id: req.body.room_id, user_id: req.body.user_id, role: req.body.role });
+        const token = tokenService.getAuthToken({ room_id: req.body.room_id, user_id: req.body.user_id, role: req.body.role });
         res.json({
             token: token,
             msg: "Token generated successfully!",
@@ -32,16 +32,12 @@ app.post('/app-token', (req, res) => {
 
 // Create a new room, either randomly or with the requested configuration
 app.post('/create-room', async (req, res) => {
-    let payload;
-    // If `random_room` is not true, look for room configuration
-    if (!req.body.random_room) {
-        payload = {
+    const payload = {
             "name": req.body.name,
             "description": req.body.description,
             "template_id": req.body.template_id,
             "region": req.body.region
         };
-    }
     try {
         const resData = await apiService.post("/rooms", payload);
         res.json(resData);

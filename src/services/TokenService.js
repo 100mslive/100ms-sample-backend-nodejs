@@ -52,8 +52,8 @@ class TokenService {
         return this.#managementToken;
     }
 
-    // Generate new App/Auth token for a peer
-    getAppToken({ room_id, user_id, role }) {
+    // Generate new Auth token for a peer
+    getAuthToken({ room_id, user_id, role }) {
         let payload = {
             access_key: TokenService.#app_access_key,
             room_id: room_id,
