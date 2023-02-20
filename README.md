@@ -68,7 +68,7 @@ This sample exposes the following endpoints
 |---|---|---|---|
 | `/create-room` | POST | JSON body <pre>{<br>&nbsp;&nbsp;"name": "new-room-1",<br>&nbsp;&nbsp;"description": "Sample description",<br>&nbsp;&nbsp;"template_id": "6318xxxxxxxxxxxxxxxc60"<br>}</pre>| Create a new room with room params ([docs](https://www.100ms.live/docs/server-side/v2/Rooms/create-via-api)) |
 | `/auth-token` | POST | JSON body <br><pre>{<br>&nbsp;&nbsp;"room_id": "632ecxxxxxxxxxxxxxxxx764",<br>&nbsp;&nbsp;"role": "host",<br>&nbsp;&nbsp;"user_id":"test_user"<br>}</pre>| Generate an auth token for a peer to join a room ([docs](https://www.100ms.live/docs/server-side/v2/introduction/authentication-and-tokens)) |
-| `/session-analytics` | GET | Query params <pre>?session_id=633dxxxxxxxxxxxxxxx7d1d2</pre>| Usage analytics for a specific session ([docs](https://www.100ms.live/docs/server-side/v2/Sessions/example-build-attendance)) |
+| `/session-analytics-by-room` | GET | Query params <pre>?room_id=633dxxxxxxxxxxxxxxx7d1d2</pre>| Usage analytics for a specific session ([docs](https://www.100ms.live/docs/server-side/v2/Sessions/example-build-attendance)) |
 
 ## Docs
 Refer to the 100ms [server-side docs](https://www.100ms.live/docs/server-side/v2/introduction/basics) to get started on your custom backend.
