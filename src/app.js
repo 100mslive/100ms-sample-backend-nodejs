@@ -53,8 +53,7 @@ app.get('/session-analytics-by-room', async (req, res) => {
     try {
         const sessionListData = await apiService.get("/sessions", { room_id: req.query.room_id });
         if (sessionListData.data.length > 0) {
-            const latestSessionId = sessionListData.data[0].id;
-            const sessionData = await apiService.get(`/sessions/${latestSessionId}`);
+            const sessionData = sessionListData.data[0];
             console.log(sessionData);
 
             // Calculate individual participants' duration
